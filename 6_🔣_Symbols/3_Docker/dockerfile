@@ -5,6 +5,8 @@ FROM cypress/included:12.17.2
 WORKDIR /cypress-project
 
 # Copy package.json and package-lock.json (if available)
+COPY cypress/ cypress/
+COPY cypress/cypress.config.js .
 COPY package.json ./
 
 # Install dependencies
@@ -17,4 +19,4 @@ COPY . .
 RUN npx cypress verify
 
 # Default command
-CMD ["npx", "cypress", "open"]
+CMD ["cypress", "run", "--spec", "cypress/integration/google.spec.js"]
